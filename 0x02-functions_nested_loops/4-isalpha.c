@@ -19,6 +19,5 @@ int _isalpha(int c)
 			if (c == lower || c == upper)
 				isletter = 1;
 		}
-	
 	return (isletter);
 }
