@@ -2,7 +2,7 @@
 
 /**
  * print_alphabet_x10 - Check main.h
- * Description: use the _putchar function to print 
+ * Description:use the _putchar function to print
  * alphabet lower case 10 times
  * Return: Nothing.
  */
