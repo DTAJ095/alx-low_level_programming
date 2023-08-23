@@ -2,6 +2,7 @@
 
 /**
  * string_toupper - Changes all lowercase letter of a string to uppercase
+ * @s: the given string
  *
  * Return: void
  */
