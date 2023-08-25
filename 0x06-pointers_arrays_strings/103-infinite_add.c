@@ -44,27 +44,39 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	{
 		sum = d1 + d2 + carry;
 		if (sum >= 10)
+		{
 			carry = sum / 10;
+		}
 		else
+		{
 			carry = 0;
+		}
 		if (sum > 0)
+		{
 		    	*(r + start) = (sum % 10) + '0';
+		}
 		else
+		{
 			*(r + start) = '0';
+		}
 		if (i > 0)
        	 	{
 			i--;
             		d1 = *(n1 + i) - '0';
        		}
 		else
+		{
 			d1 = 0;
+		}
 		if (j > 0)
         	{
 			j--;
             		d2 = *(n2 + j) - '0';
         	}	
 		else
+		{
 			d2 = 0;
+		}
 		start--; 
         	size_r--;
 	}
