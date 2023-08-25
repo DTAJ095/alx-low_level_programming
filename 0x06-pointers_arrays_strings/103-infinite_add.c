@@ -24,7 +24,7 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		start = j;
 	if (size_r <= start + 1)
 		return (0);
-	r[start + 1] ='\0';
+	r[start + 1] = '\0';
 	i--, j--;
 	d1 = *(n1 + i) - '0';
 	d2 = *(n2 + j) - '0';
