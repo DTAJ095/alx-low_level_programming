@@ -26,7 +26,7 @@ int _strlen_recursion(char *s)
 int is_palindrome(char *s)
 {
 	int end;
-	
+
 	end = _strlen_recursion(s);
 	if (end <= 1)
 		return (1);
@@ -34,7 +34,7 @@ int is_palindrome(char *s)
 }
 
 /**
- * check_palindrome - checks the paindrome
+ * check_palindrome - checks the palindrome
  * @s: the string
  * @begin: from left to right
  * @end: from right to left
