@@ -3,9 +3,10 @@
 #include<stddef.h>
 
 /**
- * create_array: function that creates an array and initializes it with a specific value
+ * create_array - function that creates an array
+ * and initializes it with a specific value
  * @size: the size of the array
- * @c: a character
+ * @c: a character to initialize the array
  *
  * Return: Null if the size is 0 or a pointer to the array
  */
