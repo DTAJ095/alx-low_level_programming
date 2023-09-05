@@ -1,9 +1,7 @@
 #include "main.h"
 #include<stdlib.h>
-
-
 /**
- * free_grid - frees a two dimensional grid previously created with alloc_grid
+ * check_free_grid - frees a two dimensional grid
  * @grid: the grid
  * @height: the grid height
  *
