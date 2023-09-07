@@ -126,7 +126,7 @@ void multiply(char *s1, char *s2)
 		len--;
 	}
 
-	for (i = 0; i < len; i++)
+	for (i = 0; i <= len; i++)
 		printf("%i", ptr[i]);
 	printf("\n");
 	free(temp);
