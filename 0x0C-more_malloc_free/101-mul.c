@@ -112,7 +112,7 @@ void multiply(char *s1, char *s2)
 		for (len2--; len2 >= 0; len2--)
 		{
 			second_digit = s2[len2] - '0';
-			mul += ptr[len2 + len1 + 1] + (first_digit * second_digit);
+			mul += ptr[len2 + len1 + 1] + (second_digit * first_digit);
 			ptr[len1 + len2 + 1] = mul % 10;
 			mul /= 10;
 		}
@@ -126,7 +126,7 @@ void multiply(char *s1, char *s2)
 		len--;
 	}
 
-	for (i = 0; i < len + 1; i++)
+	for (i = 0; i < len; i++)
 		printf("%i", ptr[i]);
 	printf("\n");
 	free(temp);
