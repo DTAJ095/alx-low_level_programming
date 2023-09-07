@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 /**
- * _isdigit - checks for digit
+ * _isdigit - check for a digit
  * @c : character to check
  * Return:0 or 1
  */
@@ -21,7 +21,8 @@ int _isdigit(char *c)
 
 /**
  * _strlen - get the length of strings
- * @str: string to get length of
+ *
+ * @str: the string to get the length
  *
  * Return: length of string
 */
@@ -37,7 +38,7 @@ int _strlen(char *str)
 
 /**
  * _memset - fills memory with a constant byte
- * @s: input pointer that represents memory block to fill
+ * @s: pointer that represents memory block to fill
  * @b: characters to fill/set
  * @n: number of bytes to be filled
  *
@@ -57,8 +58,7 @@ char *_memset(char *s, char b, unsigned int n)
 }
 
 /**
- * _calloc - allocates memory for an array using memset function
- *
+ * _calloc - function that allocates memory for an array using memset
  * @nmemb: size of array
  * @size: size of each element
  *
@@ -81,7 +81,7 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 
 
 /**
- * multiply - multiplies two arrays with 0 byte
+ * multiply - initialize array with 0 byte
  *
  * @s1: string 1
  * @s2: string 2
@@ -91,7 +91,7 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 
 void multiply(char *s1, char *s2)
 {
-	int i, len1, len2, len, first_digit, second_digit, res = 0, tmp;
+	int i, len1, len2, len, first_digit, second_digit, mul = 0, tmp;
 	char *ptr;
 	void *temp;
 
@@ -101,23 +101,23 @@ void multiply(char *s1, char *s2)
 	len = len1 + len2;
 	ptr = _calloc(sizeof(int), len);
 
-	/* store our pointer address to free later */
+	/* store the pointer addresses to free them later */
 	temp = ptr;
 
 	for (len1--; len1 >= 0; len1--)
 	{
 		first_digit = s1[len1] - '0';
-		res = 0;
+		mul = 0;
 		len2 = tmp;
 		for (len2--; len2 >= 0; len2--)
 		{
 			second_digit = s2[len2] - '0';
-			res += ptr[len2 + len1 + 1] + (first_digit * second_digit);
-			ptr[len1 + len2 + 1] = res % 10;
-			res /= 10;
+			mul += ptr[len2 + len1 + 1] + (first_digit * second_digit);
+			ptr[len1 + len2 + 1] = mul % 10;
+			mul /= 10;
 		}
-		if (res)
-			ptr[len + 1] = res % 10;
+		if (mul)
+			ptr[len1 + len2 + 1] = mul % 10;
 	}
 
 	while (*ptr == 0)
@@ -135,10 +135,9 @@ void multiply(char *s1, char *s2)
 
 /**
  * main - Entry point
- *
  * Description: a program that multiplies two positive numbers
  * @argc: number of arguments
- * @argv: arguments array
+ * @argv: array containing the command lines arguments
  *
  * Return: 0 on success 98 on failure
 */
