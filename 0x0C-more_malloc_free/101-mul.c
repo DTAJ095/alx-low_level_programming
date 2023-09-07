@@ -117,7 +117,7 @@ void multiply(char *s1, char *s2)
 			res /= 10;
 		}
 		if (res)
-			ptr[len1 + len2 + 1] = res % 10;
+			ptr[len + 1] = res % 10;
 	}
 
 	while (*ptr == 0)
