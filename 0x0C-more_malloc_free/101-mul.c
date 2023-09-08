@@ -3,159 +3,98 @@
 #include <stdio.h>
 
 /**
- * _isdigit - check for a digit
- * @c : character to check
- * Return:0 or 1
+ * is_digit - checks if a string contains a non-digit char
+ * @c: string to be evaluated
+ *
+ * Return: 0 if a non-digit is found, 1 otherwise
  */
 
-int _isdigit(char *c)
-{
-	while (*c != '\0')
-	{
-		if (*c < '0' || *c > '9')
-			return (1);
-		c++;
-	}
-	return (0);
-}
-
-/**
- * _strlen - get the length of strings
- *
- * @str: the string to get the length
- *
- * Return: length of string
-*/
-
-int _strlen(char *str)
+int is_digit(char *c)
 {
 	int i = 0;
 
-	while (str[i] != '\0')
+	while (c[i])
+	{
+		if (c[i] < '0' || c[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+/**
+ * _strlen - returns the length of a string
+ * @s: string to evaluate
+ *
+ * Return: the length of the string
+ */
+
+int _strlen(char *s)
+{
+	int i = 0;
+
+	while (s[i] != '\0')
 		i++;
 	return (i);
 }
 
 /**
- * _memset - fills memory with a constant byte
- * @s: pointer that represents memory block to fill
- * @b: characters to fill/set
- * @n: number of bytes to be filled
+ * errors - handles errors for main
  *
- * Return: pointer to the filled memory area
-*/
+ */
 
-char *_memset(char *s, char b, unsigned int n)
+void errors(void)
 {
-	unsigned int i = 0;
-
-	while (i < n)
-	{
-		s[i] = b;
-		i++;
-	}
-	return (s);
+	printf("Error\n");
+	exit(98);
 }
 
 /**
- * _calloc - function that allocates memory for an array using memset
- * @nmemb: size of array
- * @size: size of each element
- *
- * Return: pointer to new allocated memory
-*/
-
-void *_calloc(unsigned int nmemb, unsigned int size)
-{
-	char *ptr;
-
-	if (nmemb == 0 || size == 0)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (ptr == NULL)
-		return (NULL);
-	_memset(ptr, 0, nmemb * size);
-
-	return (ptr);
-}
-
-
-/**
- * multiply - initialize array with 0 byte
- *
- * @s1: string 1
- * @s2: string 2
- *
- * Return: nothing
-*/
-
-void multiply(char *s1, char *s2)
-{
-	int i, len1, len2, len, first_digit, second_digit, mul = 0, tmp;
-	char *ptr;
-	void *temp;
-
-	len1 = _strlen(s1);
-	len2 = _strlen(s2);
-	tmp = len2;
-	len = len1 + len2;
-	ptr = _calloc(sizeof(int), len);
-
-	/* store the pointer addresses to free them later */
-	temp = ptr;
-
-	for (len1--; len1 >= 0; len1--)
-	{
-		first_digit = s1[len1] - '0';
-		mul = 0;
-		len2 = tmp;
-		for (len2--; len2 >= 0; len2--)
-		{
-			second_digit = s2[len2] - '0';
-			mul += ptr[len2 + len1 + 1] + (second_digit * first_digit);
-			ptr[len1 + len2 + 1] = mul % 10;
-			mul /= 10;
-		}
-		if (mul)
-			ptr[len1 + len2 + 1] = mul % 10;
-	}
-
-	while (*ptr == 0)
-	{
-		ptr++;
-		len--;
-	}
-
-	for (i = 0; i < len; i++)
-		printf("%i", ptr[i]);
-	printf("\n");
-	free(temp);
-}
-
-
-/**
- * main - Entry point
- * Description: a program that multiplies two positive numbers
+ * main - multiplies two positive numbers
  * @argc: number of arguments
- * @argv: array containing the command lines arguments
+ * @argv: array of arguments
  *
- * Return: 0 on success 98 on failure
-*/
+ * Return: always 0 (Success)
+ */
 
 int main(int argc, char *argv[])
 {
-	char *num1 = argv[1];
-	char *num2 = argv[2];
+	char *num1, *num2;
+	int len1, len2, len, i, carry, first_digit, second_digit, *mul, a = 0;
 
-	if (argc != 3 || _isdigit(num1) || _isdigit(num2))
-		exit(98);
-
-	if (*num1 == '0' || *num2 == '0')
+	num1 = argv[1], num2 = argv[2];
+	if (argc != 3 || !is_digit(num1) || !is_digit(num2))
+		errors();
+	len1 = _strlen(num1), len2 = _strlen(num2);
+	len = len1 + len2 + 1;
+	mul = malloc(sizeof(int) * len);
+	if (!mul)
+		return (1);
+	for (i = 0; i <= len1 + len2; i++)
+		mul[i] = 0;
+	for (len1 = len1 - 1; len1 >= 0; len1--)
 	{
-		_putchar('0');
-		_putchar('\n');
+		first_digit = num1[len1] - '0', carry = 0;
+		for (len2 = _strlen(num2) - 1; len2 >= 0; len2--)
+		{
+			second_digit = num2[len2] - '0';
+			carry += mul[len1 + len2 + 1] + (first_digit * second_digit);
+			mul[len1 + len2 + 1] = carry % 10;
+			carry /= 10;
+		}
+		if (carry > 0)
+			mul[len1 + len2 + 1] += carry;
 	}
-	else
-		multiply(num1, num2);
+	for (i = 0; i < len - 1; i++)
+	{
+		if (mul[i])
+			a = 1;
+		if (a)
+			_putchar(mul[i] + '0');
+	}
+	if (!a)
+		_putchar('0');
+	_putchar('\n');
+	free(mul);
 	return (0);
 }
