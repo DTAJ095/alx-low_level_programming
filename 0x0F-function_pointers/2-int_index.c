@@ -3,7 +3,7 @@
 #include<stdio.h>
 
 /**
- * int int_index - function that searches for an integer
+ * int_index - function that searches for an integer
  * @array: the array of elements
  * @size: the size of the array
  * @cmp: the pointer to the function to be use to compare values
