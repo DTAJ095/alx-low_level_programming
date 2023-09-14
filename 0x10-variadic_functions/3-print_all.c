@@ -9,18 +9,18 @@
 
 void print_all(const char * const format, ...)
 {
-	int i = 0, check_status, j;
-	char *string;
-	const char total_arg[] = "ifcs";
 	va_list vlist;
+	unsigned int i = 0, j, check_status = 0;
+	char *string;
+	const char total_arg[] = "cifs";
 
 	va_start(vlist, format);
-	while (format != NULL && format[i] != '\0')
+	while (format && format[i])
 	{
 		j = 0;
 		while (total_arg[j])
 		{
-			if (format[i] == total_arg[j] && check_status == 0)
+			if (format[i] == total_arg[j] && check_status)
 			{
 				printf(", ");
 				break;
@@ -28,24 +28,24 @@ void print_all(const char * const format, ...)
 		}
 		switch (format[i])
 		{
-			case 'i':
-				printf("%d", va_arg(vlist, int)), check_status = 0;
+		case 'c':
+			printf("%c", va_arg(vlist, int)), check_status = 1;
+			break;
+		case 'i':
+			printf("%d", va_arg(vlist, int)), check_status = 1;
+			break;
+		case 'f':
+			printf("%f", va_arg(vlist, double)), check_status = 1;
+			break;
+		case 's':
+			string = va_arg(vlist, char *), check_status = 1;
+			if (!string)
+			{
+				printf("(nil)");
 				break;
-			case 'f':
-				printf("%f", va_arg(vlist, double)), check_status = 0;
-				break;
-			case 'c':
-				printf("%c", va_arg(vlist, int)), check_status = 0;
-				break;
-			case 's':
-				string = va_arg(vlist, char *), check_status = 0;
-				if (string == NULL)
-				{
-					printf("(nil)");
-					break;
-				}
-				printf("%s", string);
-				break;
+			}
+			printf("%s", string);
+			break;
 		} i++;
 	}
 	printf("\n"), va_end(vlist);
