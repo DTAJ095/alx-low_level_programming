@@ -36,6 +36,6 @@ int main(int argc, char *argv[])
 		}
 		printf("%02hhx ", func_ptr[i]);
 	}
-	
+
 	return (0);
 }
