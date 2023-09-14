@@ -41,7 +41,7 @@ void print_all(const char * const format, ...)
 			case 's':
 				string = va_arg(vlist, char *);
 				if (string == NULL)
-					string = "(nil)";
+					printf("(nil)");
 				printf("%s", string);
 				break;
 		} i++;
