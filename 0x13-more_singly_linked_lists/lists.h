@@ -19,8 +19,9 @@ typedef struct listint_s
 	struct listint_s *next;
 } listint_t;
 
-/* FUNCTION PROTOTYPES */
+
+/* function prototypes */
 int _putchar(char c);
 size_t print_listint(const listint_t *h);
 
-#endif
+#endif /* _LISTS_H_ */
