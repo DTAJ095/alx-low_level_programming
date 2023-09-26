@@ -50,7 +50,7 @@ size_t loop_listint_len(const listint_t *head)
 		exit(98);
 
 	first_ptr = head->next;
-	second_ptr = (head->next)->next;
+	second_ptr = head->next->next;
 
 	while (second_ptr)
 	{
