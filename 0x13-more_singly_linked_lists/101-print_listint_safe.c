@@ -56,7 +56,7 @@ size_t loop_listint_len(const listint_t *head)
 	{
 		if (first_ptr == second_ptr)
 		{
-			first_ptr = second_ptr;
+			first_ptr = head;
 			while (first_ptr != second_ptr)
 			{
 				nodes++;
