@@ -50,7 +50,7 @@ size_t loop_listint_len(const listint_t *head)
 		exit(98);
 
 	first_ptr = head->next;
-	second_ptr = head->next->next;
+	second_ptr = (head->next)->next;
 
 	while (second_ptr)
 	{
@@ -67,10 +67,10 @@ size_t loop_listint_len(const listint_t *head)
 			first_ptr = first_ptr->next;
 			while (first_ptr != second_ptr)
 			{
-				nodes++;
 				first_ptr = first_ptr->next;
+				nodes++;
 			}
-
+			
 			return (nodes);
 		}
 		first_ptr = first_ptr->next;
