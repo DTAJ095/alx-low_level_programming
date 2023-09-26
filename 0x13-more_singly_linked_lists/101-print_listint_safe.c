@@ -1,80 +1,69 @@
 #include "lists.h"
 
 /**
- * print_listint_safe -  function that prints a listint_t linked list.
+ * print_listint_safe - function that prints a listint_t linked list.
  * @head: the pointer to the head of the list
  *
- * Return: The number of nodes in the list
+ * Return: tne number of nodes in the list
  */
 
 size_t print_listint_safe(const listint_t *head)
 {
-	size_t nodes, idx = 0;
+	size_t nodes = 0;
+	listp_t *tmp, *fst_ptr, *scnd_ptr;
 
-	nodes = loop_listint_len(head);
-
-	if (nodes == 0)
+	tmp = NULL;
+	while (head != NULL)
 	{
-		for (; head != NULL; nodes++)
+		fst_ptr = malloc(sizeof(listp_t));
+
+		if (fst_ptr == NULL)
+			exit(98);
+
+		fst_ptr->p = (void *)head;
+		fst_ptr->next = tmp;
+		tmp = fst_ptr;
+
+		scnd_ptr = tmp;
+
+		while (scnd_ptr->next != NULL)
 		{
-			printf("[%p] %d\n", (void *)head, head->n);
-			head = head->next;
-		}
-	}
-	else
-	{
-		for (; idx < nodes; idx++)
-		{
-			printf("[%p] %d\n", (void *)head, head->n);
-			head = head->next;
+			scnd_ptr = scnd_ptr->next;
+			if (head == scnd_ptr->p)
+			{
+				printf("-> [%p] %d\n", (void *)head, head->n);
+				free_listp(&tmp);
+				return (nodes);
+			}
 		}
 
-		printf("-> [%p] %d\n", (void *)head, head->n);
+		printf("[%p] %d\n", (void *)head, head->n);
+		head = head->next;
+		nodes++;
 	}
+	free_listp(&tmp);
 	return (nodes);
 }
 
 /**
- * loop_listint_len - Counts the number of unique nodes in a list
- * @head: the pointer to the head of the list
+ * free_listp - frees a linked list
+ * @head: head of a list.
  *
- * Return: number of nodes
+ * Return: no return.
  */
-
-size_t loop_listint_len(const listint_t *head)
+void free_listp(listp_t **head)
 {
-	const listint_t *first_ptr, *second_ptr;
-	size_t nodes = 1;
+	listp_t *tmp;
+	listp_t *current;
 
-	if (head == NULL || head->next == NULL)
-		exit(98);
-
-	first_ptr = head->next;
-	second_ptr = (head->next)->next;
-
-	while (second_ptr)
+	if (head != NULL)
 	{
-		if (first_ptr == second_ptr)
+		current = *head;
+		while ((tmp = current) != NULL)
 		{
-			first_ptr = head;
-			while (first_ptr != second_ptr)
-			{
-				nodes++;
-				first_ptr = first_ptr->next;
-				second_ptr = second_ptr->next;
-			}
-
-			first_ptr = first_ptr->next;
-			while (first_ptr != second_ptr)
-			{
-				first_ptr = first_ptr->next;
-				nodes++;
-			}
-			
-			return (nodes);
+			current = current->next;
+			free(tmp);
 		}
-		first_ptr = first_ptr->next;
-		second_ptr = (second_ptr->next)->next;
+		*head = NULL;
 	}
-	return (0);
 }
