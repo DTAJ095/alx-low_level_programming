@@ -44,7 +44,7 @@ size_t print_listint_safe(const listint_t *head)
 size_t loop_listint_len(const listint_t *head)
 {
 	const listint_t *first_ptr, *second_ptr;
-	size_t nodes = 0;
+	size_t nodes = 1;
 
 	if (head == NULL || head->next == NULL)
 		exit(98);
