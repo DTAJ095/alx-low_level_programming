@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * print_buffer - prints a buffer
+ * @file: the file in which you will print the buffer
+ *
+ * Return: Nothing
+ */
+
 void *print_buffer(char *file)
 {
 	char *buffer;
@@ -14,6 +21,13 @@ void *print_buffer(char *file)
 	return (buffer);
 }
 
+/**
+ * close_file - closes a file
+ * @fd: the file description
+ *
+ * return: Nothing
+ */
+
 void close_file(int fd)
 {
 	int cl;
@@ -25,6 +39,16 @@ void close_file(int fd)
 		exit(100);
 	}
 }
+
+/**
+ * main - Entry point
+ * Description: a program that copies the content of a file
+ * to another one
+ * @argc: the arguments count
+ * @argv: the array containing the command lines arguments
+ *
+ * Return: Always 0 (Success)
+ */
 
 int main(int argc, char *argv[])
 {
