@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 		}
 
 		rd = read(src_file, buffer, 1024);
-		dest_file = open(argv[2], O_WRONLY | O_APPEND);
+		dest_file = open(argv[2], O_CREAT | O_WRONLY | O_APPEND);
 	}
 	free(buffer);
 	close_file(src_file);
