@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 	src_file = open(argv[1], O_RDONLY);
 	dest_file = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	rd = read(src_file, buffer, 1024);
-	
+
 	while (rd > 1)
 	{
 		if (src_file == -1 || rd == -1)
