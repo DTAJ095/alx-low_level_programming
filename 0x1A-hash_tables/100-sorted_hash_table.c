@@ -80,7 +80,7 @@ void add_to_sorted_list(shash_table_t *table, shash_node_t *node)
 	temp = table->shead;
 	while (temp != NULL)
 	{
-		if (strcmp(node->key , temp->key) < 0)
+		if (strcmp(node->key, temp->key) < 0)
 		{
 			node->snext = temp;
 			node->sprev = temp->sprev;
