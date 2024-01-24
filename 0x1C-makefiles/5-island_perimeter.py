@@ -8,7 +8,7 @@ def island_perimeter(grid):
     """ Returns the perimeter of the island
     Params:
         grid(list): list of integers representing the island
-    
+
     Return:
         the perimeter of the island define by the grid
     """
